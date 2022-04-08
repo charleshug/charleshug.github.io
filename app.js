@@ -120,10 +120,12 @@ function newRound(){
 
 function clearScreen() {
     guessDisplay.value = "";
+    guessDisplay.innerText = "";
 }
 
 function display(value) {
     guessDisplay.value += value;
+    guessDisplay.innerText += value;
 }
 
 function checkGuess() {    
