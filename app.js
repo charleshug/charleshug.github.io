@@ -159,7 +159,7 @@ function getRoundTotalTime(){
     guessArray.forEach(function(item){
         time += parseFloat(item.time);
     });
-    return time;
+    return time.toFixed(3);
 }
 
 //from mozilla
