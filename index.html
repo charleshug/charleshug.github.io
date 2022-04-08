@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathGame</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="mainScreen">
+            <h1>Math Game</h1>
+            <button class="btn start">Start</button>
+            <button class="btn settings">Settings</button>
+        </div>
+
+        <div class="settingsScreen">
+            <h1>Settings</h1>
+            <div>
+                <label for="practiceNum">Choose a number to practice (1-9):</label>
+                <input type="number" id="practiceNum" name="practiceNum" value="0" min="0" max="9" step="1">
+            </div>
+            <div>
+                <p>Click to ignore specific numbers</p>
+                <div class="displayIgnoreNum">
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                    <span>6</span>
+                    <span>7</span>
+                    <span>8</span>
+                    <span>9</span>
+                </div>
+            </div>
+            <div>
+                <p>Choose operators</p>
+                <div class="displayOperators">
+                    <span class="selectedNum">+</span>
+                    <span>-</span>
+                    <span>*</span>
+                    <span>÷</span>
+                </div>
+            </div>
+            <div>
+                <label for="chooseTime">Game Time (s):</label>
+                <input type="number" id="chooseTime" name="chooseTime" value="30" min="1" max="60" step="1">
+            </div>
+            <div>
+                <label for="chooseQuestionCount">How Many Questions:</label>
+                <input type="number" id="chooseQuestionCount" name="chooseQuestionCount" value="10" min="1" max="100" step="1">
+            </div>
+            <button class="btn back">Back</button>
+        </div>
+
+        <div class="gameBoard">
+            <p id="message"></p>
+            <div class="random-numbers">
+                <span id="num1"></span>
+                <span id="displayOperator">+</span>
+                <span id="num2"></span>
+            </div>
+            <input id="guess" class="display-box" type="text" autofocus >
+            <div class="keyboard">
+                <input class="keypad" type="button" value="1" onclick="display('1')" />
+                <input class="keypad" type="button" value="2" onclick="display('2')" />
+                <input class="keypad" type="button" value="3" onclick="display('3')" />
+                <input class="keypad" type="button" value="4" onclick="display('4')" />
+                <input class="keypad" type="button" value="5" onclick="display('5')" />
+                <input class="keypad" type="button" value="6" onclick="display('6')" />
+                <input class="keypad" type="button" value="7" onclick="display('7')" />
+                <input class="keypad" type="button" value="8" onclick="display('8')" />
+                <input class="keypad" type="button" value="9" onclick="display('9')" />
+                <input class="delete" type="button" value="clear" onclick="clearScreen()" />
+                <input class="keypad" type="button" value="0" onclick="display('0')" />
+                <input class="return" type="button" value="enter" onclick="checkGuess('')" />
+            </div>
+            <button class="btn quit">Quit</button>
+        </div>
+
+        <div class="resultsScreen">
+            <h1>Results</h1>
+            <p class="displayResultsTime"></p>
+            <p class="displayResultsPerQuestion"></p>
+            <button class="btn start">Again?</button>
+            <button class="btn back">Main Menu</button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="app.js"></script>
+    
+</body>
+</html>

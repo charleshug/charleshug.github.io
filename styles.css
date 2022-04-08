@@ -1,0 +1,115 @@
+*{
+    margin:0;
+    padding: 0;
+}
+
+.wrapper{
+    display: grid;
+    min-height: 100vh;
+    place-items: center;
+}
+.mainScreen{
+    display: grid;
+    gap: 2rem;
+}
+.resultsScreen{
+    display: none;
+    gap: 1rem;
+    place-items: center;
+}
+.resultsScreen>.btn {
+    width: 10rem;
+}
+.btn{   
+    border: 2px solid black;
+    border-radius: .25rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 2rem;
+}
+.back{
+    width: 10rem;
+}
+.settingsScreen{
+    margin: 0.5rem;
+    display: none;
+    gap: 2rem;
+    place-items: center;
+    font-size: 2rem;
+}
+.settingsScreen h1 {
+    text-align: center;
+}
+.settingsScreen input{
+    font-size: 2rem;
+    width: 4rem;
+}
+.displayIgnoreNum{
+    display: flex;
+    justify-content: center;
+}
+
+.displayIgnoreNum span{
+    border-radius: .25rem;
+    border: 2px solid black;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+.displayOperators {
+    display: flex;
+    justify-content: center;
+}
+.displayOperators span {
+    border-radius: .25rem;
+    border: 2px solid black;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+.selectedNum{
+    background-color: lightblue;
+}
+.gameBoard {
+    width: 20rem;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+}
+.gameBoard p {
+    font-size: 2rem;
+    display: grid;
+    place-items: center;
+}
+.random-numbers{
+    height: 4rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: stretch;
+}
+.random-numbers span{
+    font-size: 3rem;
+}
+.display-box{
+    height: 4rem;
+    font-size: 3rem;
+}
+.keyboard {  
+    width: 20rem;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.keyboard input {  
+    font-size: 2rem;
+    line-height: 4rem;  
+    text-align: center;  
+    border: 1px solid #f9f9f9;
+    border-radius: 5px;
+}
+ 
+.keyboard div:hover {  
+    position: relative;  
+    top: 1px;  
+    left: 1px;  
+    border-color: #e5e5e5;  
+    cursor: pointer;  
+}
