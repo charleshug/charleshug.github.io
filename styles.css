@@ -90,6 +90,7 @@
 .display-box{
     height: 4rem;
     font-size: 3rem;
+    color: black;
 }
 .keyboard {  
     width: 20rem;
