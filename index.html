@@ -19,34 +19,47 @@
             <h1>Settings</h1>
             <div>
                 <label for="practiceNum">Choose a number to practice (1-9):</label>
-                <input type="number" id="practiceNum" name="practiceNum" value="0" min="0" max="9" step="1">
+                <select name="practiceNum" id="practiceNum">
+                    <option value=""></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
             </div>
-            <div>
-                <p>Click to ignore specific numbers</p>
-                <div class="displayIgnoreNum">
-                    <span>1</span>
-                    <span>2</span>
-                    <span>3</span>
-                    <span>4</span>
-                    <span>5</span>
-                    <span>6</span>
-                    <span>7</span>
-                    <span>8</span>
-                    <span>9</span>
-                </div>
+            <div>    
+                <fieldset>
+                    <legend>Click to ignore specific numbers</legend>
+                    <div>
+                        <input type="checkbox" name="ignoreNum" value="1">1
+                        <input type="checkbox" name="ignoreNum" value="2">2
+                        <input type="checkbox" name="ignoreNum" value="3">3
+                        <input type="checkbox" name="ignoreNum" value="4">4
+                        <input type="checkbox" name="ignoreNum" value="5">5
+                        <input type="checkbox" name="ignoreNum" value="6">6
+                        <input type="checkbox" name="ignoreNum" value="7">7
+                        <input type="checkbox" name="ignoreNum" value="8">8
+                        <input type="checkbox" name="ignoreNum" value="9">9
+                    </div>                
+                </fieldset>
             </div>
             <div>
                 <p>Choose operators</p>
-                <div class="displayOperators">
-                    <span class="selectedNum">+</span>
-                    <span>-</span>
-                    <span>*</span>
-                    <span>÷</span>
+                <div class="operatorsContainer">
+                    <span class="displayOperators selectedNum">+</span>
+                    <span class="displayOperators">-</span>
+                    <span class="displayOperators">*</span>
+                    <span class="displayOperators">/</span>
                 </div>
             </div>
             <div>
                 <label for="chooseTime">Game Time (s):</label>
-                <input type="number" id="chooseTime" name="chooseTime" value="30" min="1" max="60" step="1">
+                <input type="number" id="chooseTime" name="chooseTime" value="30" min="5" max="60" step="5">
             </div>
             <div>
                 <label for="chooseQuestionCount">How Many Questions:</label>
@@ -56,15 +69,25 @@
         </div>
 
         <div class="gameBoard">
+            <div>
+                <span>Time: </span>
+                <span id="displayTime"></span>
+            </div>
+            <div>
+                <span>Question:</span>
+                <span id="currentQuestion"></span>
+                <span> / </span>
+                <span id="totalQuestionsCount"></span>
+            </div>
             <p id="message"></p>
             <div class="random-numbers">
                 <span id="num1"></span>
                 <span id="displayOperator">+</span>
                 <span id="num2"></span>
             </div>
-            <!-- <input id="guess" class="display-box" type="number">
-            -->
-            <p id="guess" class="display-box"></p>
+            <input id="guess" class="display-box">
+            
+            <!-- <p id="guess" class="display-box"></p> -->
             <div class="keyboard">
                 <input class="keypad" type="button" value="1" onclick="display('1')" />
                 <input class="keypad" type="button" value="2" onclick="display('2')" />
@@ -75,8 +98,10 @@
                 <input class="keypad" type="button" value="7" onclick="display('7')" />
                 <input class="keypad" type="button" value="8" onclick="display('8')" />
                 <input class="keypad" type="button" value="9" onclick="display('9')" />
-                <input class="delete" type="button" value="clear" onclick="clearScreen()" />
+                <input class="keypad" type="button" value="-" onclick="display('-')" />
                 <input class="keypad" type="button" value="0" onclick="display('0')" />
+                <input class="keypad" type="button" value="." onclick="display('.')" />
+                <input class="delete" type="button" value="clear" onclick="clearScreen()" />
                 <input class="return" type="button" value="enter" onclick="checkGuess('')" />
             </div>
             <button class="btn quit">Quit</button>

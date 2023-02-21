@@ -1,7 +1,12 @@
+const currentQuestionDisplay = document.getElementById('currentQuestion')
+const totalQuestionsCountDisplay = document.getElementById('totalQuestionsCount')
 const messageDisplay = document.querySelector('#message');
 const num1Display = document.querySelector('#num1');
 const num2Display = document.querySelector('#num2');
-const guessDisplay = document.querySelector('#guess');
+const operatorDisplay = document.getElementById('displayOperator')
+const guessDisplay = document.getElementById('guess');
+const displayTime = document.getElementById('displayTime');
+const settingsTime = document.getElementById('chooseTime');
 
 const startButton = document.querySelector('.mainScreen > .start');
 const settingsButton = document.querySelector('.mainScreen > .settings');
@@ -19,9 +24,9 @@ const divResultsScreen = document.querySelector('.resultsScreen');
 const inputMaxQuestion = document.querySelector('#chooseQuestionCount');
 
 let ignoreNumSpan = document.querySelectorAll('.displayIgnoreNum span');
-let operatorSelect = document.querySelectorAll('.displayOperators span');
+let operatorSelect = document.querySelectorAll('.displayOperators');
 let operatorArray = ["+"];
-let ignoreNum = [];
+let ignoreNumArray = [];
 let guessArray = [];
 let highScoreArray = [];
 let practiceNumValue;
@@ -31,6 +36,8 @@ let timeCurrent
 let timeMax
 let questionCurrent
 let questionMax
+let timer;
+let timeCounter;
 
 ignoreNumSpan.forEach(function (item){
    item.addEventListener('click', function(event){
@@ -71,6 +78,7 @@ settingsButton.addEventListener('click', function(){
 });
 
 gameQuitButton.addEventListener('click', function(){
+    clearInterval(timer);
     divMainScreen.style.display = 'grid';
     divGameBoard.style.display = 'none';
 });
@@ -96,8 +104,25 @@ function startGame(){
     newRound()
 }
 
+function getIgnoredNumsArray(){
+    let ignoreNumAll = document.getElementsByName('ignoreNum');
+    let output = []
+    for(var i = 0; i< ignoreNumAll.length; i++){
+        if(ignoreNumAll[i].checked){
+            output.push(parseInt(ignoreNumAll[i].value))
+        }
+    }
+    return output;
+}
 
 function newGame(){
+    //timer operations
+    timeCounter = parseInt(settingsTime.value) || 30
+    renderTime()
+    timer = setInterval(renderTime,1000)
+    operatorArray = getOperatorArray()
+    ignoreNumArray = getIgnoredNumsArray()
+    practiceNumValue = document.getElementById('practiceNum').value;
     questionCurrent = 0
     questionMax = parseInt(inputMaxQuestion.value)
     guessArray = []; //empty the array
@@ -105,18 +130,53 @@ function newGame(){
     clearScreen()
 }
 
-function newRound(){
-    
-    let num1 = practiceNumValue || getRandomIntInclusive(1,9)
-    let num2 = getRandomIntInclusive(1,9)
-    solution = num1 + num2
-    document.querySelector('#guess').focus()
+function getOperatorArray(){
+    if (operatorArray.length <= 0) {
+        operatorSelect[0].classList.add('selectedNum')
+        let operatorDisplay = document.getElementsByClassName('displayOperators')
+        return ["+"]
+    } else {
+        return operatorArray
+    }
+}
 
+function renderTime(){
+    if(timeCounter > 0){
+        displayTime.innerText = timeCounter--;
+    } else {
+        timeCounter = 0;
+        displayTime.innerText = timeCounter;
+        messageDisplay.innerText = "Game Over";
+        clearInterval(timer);
+        console.log(guessArray)
+        divGameBoard.style.display = 'none';
+        showResultsScreen()
+    }
+}
+
+function getRandomItemFromArray(array){
+    return array[Math.floor(Math.random()*array.length)];
+}
+
+function newRound(){
+    let MIN = 1
+    let MAX = 9
+    let num1 = parseInt(practiceNumValue) || getRandomIntInclusive(MIN,MAX)
+    let num2 = getRandomIntInclusive(MIN, MAX)
+    let operator = getRandomItemFromArray(operatorArray)
+    solution = parseFloat(eval(num1 + operator + num2).toFixed(3))
+    console.log(solution)
+    guessDisplay.focus()
+
+    currentQuestionDisplay.textContent = questionCurrent
+    totalQuestionsCountDisplay.textContent = questionMax
     num1Display.textContent = num1
     num2Display.textContent = num2
+    operatorDisplay.textContent = operator
 
     timeStart = Date.now()
 }
+
 
 function clearScreen() {
     guessDisplay.value = "";
@@ -140,18 +200,32 @@ function checkGuess() {
         questionCurrent++;
         
         if (questionCurrent >= questionMax){ //game over, show results
+            clearInterval(timer);
             console.log(guessArray)
             divGameBoard.style.display = 'none';
             showResultsScreen()
         } else{
+        messageDisplay.classList.add('correct')
+        let removeShake = setTimeout(clearCorrectClass, 1000)
         clearScreen()
         newRound()
         }
     }
     else {
         messageDisplay.textContent = 'Try again!'
+        messageDisplay.classList.add('shake')
+        let removeShake = setTimeout(clearShakeClass,1000)
         clearScreen()
+        guessDisplay.focus()
     }
+}
+
+function clearShakeClass(){
+    messageDisplay.classList.remove('shake')
+}
+
+function clearCorrectClass() {
+    messageDisplay.classList.remove('correct')
 }
 
 function getRoundTotalTime(){
@@ -169,7 +243,7 @@ function getRandomIntInclusive(min, max) {
   max = Math.floor(max);
     let tempValue; 
     do{ tempValue = Math.floor(Math.random() * (max - min + 1) + min);
-} while (ignoreNum.includes(tempValue));
+    } while (ignoreNumArray.includes(tempValue));
   return tempValue;
 }
 

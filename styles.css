@@ -54,15 +54,17 @@
     padding: 0.5rem;
     cursor: pointer;
 }
-.displayOperators {
+.operatorsContainer {
     display: flex;
     justify-content: center;
 }
-.displayOperators span {
+.displayOperators {
     border-radius: .25rem;
     border: 2px solid black;
     padding: 0.5rem;
     cursor: pointer;
+    text-align: center;
+    min-width: 50px;
 }
 .selectedNum{
     background-color: lightblue;
@@ -113,4 +115,22 @@
     left: 1px;  
     border-color: #e5e5e5;  
     cursor: pointer;  
+}
+
+.correct {
+    animation: correct 0.5s 1;
+}
+
+@keyframes correct {
+    0% { background-color: white;}
+    50% { background-color: lightgreen;}
+}
+
+.shake {
+    animation: shake 0.5s 1;
+}
+
+@keyframes shake {
+    25% {transform: rotate(5deg);}
+    75% {transform: rotate(-5deg);}
 }
